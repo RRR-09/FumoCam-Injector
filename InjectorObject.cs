@@ -40,7 +40,25 @@ namespace Injector
             exploitModule.LaunchExploit();
             // Surpress the on-screen loading animation
             await Task.Delay(5000);
-            exploitModule.ExecuteScript("while wait()do if _G.GayAPIScreen then return end;for a,b in pairs(game:GetService('CoreGui'):GetChildren())do if b.Name=='CoreScriptLocalization'or b.Name=='RobloxGui'or b.Name=='RobloxPromptGui'or b.Name=='PurchasePromptApp'or b.Name=='RobloxLoadingGui'or b.Name=='RobloxNetworkPauseNotification'or b.Name=='DevConsoleMaster'or b.Name=='Chat'or b.Name=='BubbleChat'then else b:Destroy()end end end");
+            exploitModule.ExecuteScript(@"while wait() do 
+                if _G.GayAPIScreen then return end; --Lovely name by the EE developers.
+                local allowedGUIs = {
+                    ['CoreScriptLocalization'] = true,
+                    ['RobloxGui'] = true,
+                    ['RobloxPromptGui'] = true,
+                    ['PurchasePromptApp'] = true,
+                    ['RobloxLoadingGui'] = true,
+                    ['RobloxNetworkPauseNotification'] = true,
+                    ['DevConsoleMaster'] = true,
+                    ['Chat'] = true,
+                    ['BubbleChat'] = true
+                }
+                for k,v in pairs(game:GetService('CoreGui'):GetChildren()) do 
+                    if not allowedGUIs[v.Name] then 
+                        v:Destroy()
+                    end 
+                end 
+            end");
             await Task.Delay(2000);
             exploitModule.ExecuteScript("_G.GayAPIScreen = true");
         }
